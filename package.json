@@ -1,0 +1,25 @@
+{
+  "name": "openmeetings-node-client",
+  "version": "1.0.0",
+  "description": "OpenMeetings NPM package to expose OpenMeetings Rest API - see https://openmeetings.apache.org/swagger/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/om-hosting/openmeetings-node-client.git"
+  },
+  "keywords": [
+    "openmeetings",
+    "node",
+    "rest-api",
+    "client"
+  ],
+  "author": "Sebastian Wagner",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/om-hosting/openmeetings-node-client/issues"
+  },
+  "homepage": "https://github.com/om-hosting/openmeetings-node-client#readme"
+}
