@@ -38,6 +38,8 @@ See also the sample project at: https://github.com/om-hosting/openmeetings-node-
 
 ## Available APIs 
 
+This is based on the OpenMeetings-7.0.0 Rest API
+
 Available APIs are:
 * https://openmeetings.apache.org/swagger/#/UserService
 * https://openmeetings.apache.org/swagger/#/RoomService
@@ -54,6 +56,7 @@ See also: https://openmeetings.apache.org/swagger/
 
 ## Package information
 
+Some models have been updated post generation to have correct types.
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 

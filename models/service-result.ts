@@ -28,5 +28,13 @@ export interface ServiceResult {
      * @type {string}
      * @memberof ServiceResult
      */
-    type?: any;
+    type?: ServiceResultTypeEnum;
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export enum ServiceResultTypeEnum {
+    ERROR = 'ERROR',
+    SUCCESS = 'SUCCESS'
 }
