@@ -11,6 +11,8 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {ServiceResultType} from "./enums/service-result-type";
+
 /**
  * 
  * @export
@@ -28,13 +30,5 @@ export interface ServiceResult {
      * @type {string}
      * @memberof ServiceResult
      */
-    type?: ServiceResultTypeEnum;
-}
-/**
- * @export
- * @enum {string}
- */
-export enum ServiceResultTypeEnum {
-    ERROR = 'ERROR',
-    SUCCESS = 'SUCCESS'
+    type?: ServiceResultType;
 }
