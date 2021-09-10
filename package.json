@@ -1,6 +1,6 @@
 {
   "name": "openmeetings-node-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OpenMeetings NPM package to expose OpenMeetings Rest API - see https://openmeetings.apache.org/swagger/",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
