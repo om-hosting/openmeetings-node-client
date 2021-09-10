@@ -1,4 +1,13 @@
-## @
+## OpenMeetings Client for Node
+
+This library is a client in TypeScript for connecting to https://openmeetings.apache.org/ and using the Rest API in order to login and access the Web Conference Room
+
+Most of the the APIs exposed are meant to be for server to server integration!
+
+See also: https://openmeetings.apache.org/swagger/
+
+## Package information
+
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
