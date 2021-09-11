@@ -16,10 +16,12 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { ExternalUserDTO } from '../models';
+import { RoomOptionsDTO } from '../models';
 import { ServiceResult } from '../models';
-import { UserBody } from '../models';
 import { UserDTO } from '../models';
-import { UserHashBody } from '../models';
+import * as FormData from "form-data";
+
 /**
  * UserServiceApi - axios parameter creator
  * @export
@@ -29,11 +31,12 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Adds a new User like through the Frontend, but also does activates the  Account To do SSO see the methods to create a hash and use those ones!
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {UserBody} [body] 
+         * @param {UserDTO} [user] 
+         * @param {boolean} [confirm] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        add3: async (sid: string, body?: UserBody, options: any = {}): Promise<RequestArgs> => {
+        add3: async (sid: string, user?: UserDTO, confirm?: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'sid' is not null or undefined
             if (sid === null || sid === undefined) {
                 throw new RequiredError('sid','Required parameter sid was null or undefined when calling add3.');
@@ -48,13 +51,22 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             if (sid !== undefined) {
                 localVarQueryParameter['sid'] = sid;
             }
 
-            localVarHeaderParameter['Content-Type'] = '*/*';
 
+            if (user !== undefined) { 
+                localVarFormParams.append('user', JSON.stringify(user));
+            }
+
+            if (confirm !== undefined) { 
+                localVarFormParams.append('confirm', JSON.stringify(confirm));
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -65,8 +77,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -220,11 +231,12 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Sets the SessionObject for a certain SID, after setting this  Session-Object you can use the SID + a RoomId to enter any Room. ...  Session-Hashs are deleted 15 minutes after the creation if not used.
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {UserHashBody} [body] 
+         * @param {ExternalUserDTO} [user] 
+         * @param {RoomOptionsDTO} [options] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomHash: async (sid: string, body?: UserHashBody, options: any = {}): Promise<RequestArgs> => {
+        getRoomHash: async (sid: string, user?: ExternalUserDTO, roomOptions?: RoomOptionsDTO, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'sid' is not null or undefined
             if (sid === null || sid === undefined) {
                 throw new RequiredError('sid','Required parameter sid was null or undefined when calling getRoomHash.');
@@ -239,13 +251,22 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             if (sid !== undefined) {
                 localVarQueryParameter['sid'] = sid;
             }
 
-            localVarHeaderParameter['Content-Type'] = '*/*';
 
+            if (user !== undefined) { 
+                localVarFormParams.append('user', JSON.stringify(user));
+            }
+
+            if (roomOptions !== undefined) {
+                localVarFormParams.append('options', JSON.stringify(roomOptions));
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -256,8 +277,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -322,17 +342,18 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
  * UserServiceApi - functional programming interface
  * @export
  */
-export const    UserServiceApiFp = function(configuration?: Configuration) {
+export const UserServiceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Adds a new User like through the Frontend, but also does activates the  Account To do SSO see the methods to create a hash and use those ones!
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {UserBody} [body] 
+         * @param {UserDTO} [user] 
+         * @param {boolean} [confirm] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async add3(sid: string, body?: UserBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserDTO>>> {
-            const localVarAxiosArgs = await UserServiceApiAxiosParamCreator(configuration).add3(sid, body, options);
+        async add3(sid: string, user?: UserDTO, confirm?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserDTO>>> {
+            const localVarAxiosArgs = await UserServiceApiAxiosParamCreator(configuration).add3(sid, user, confirm, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -383,12 +404,13 @@ export const    UserServiceApiFp = function(configuration?: Configuration) {
         /**
          * Sets the SessionObject for a certain SID, after setting this  Session-Object you can use the SID + a RoomId to enter any Room. ...  Session-Hashs are deleted 15 minutes after the creation if not used.
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {UserHashBody} [body] 
+         * @param {ExternalUserDTO} [user] 
+         * @param {RoomOptionsDTO} [options] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRoomHash(sid: string, body?: UserHashBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResult>> {
-            const localVarAxiosArgs = await UserServiceApiAxiosParamCreator(configuration).getRoomHash(sid, body, options);
+        async getRoomHash(sid: string, user?: ExternalUserDTO, roomOptions?: RoomOptionsDTO, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResult>> {
+            const localVarAxiosArgs = await UserServiceApiAxiosParamCreator(configuration).getRoomHash(sid, user, roomOptions, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -420,12 +442,13 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         /**
          * Adds a new User like through the Frontend, but also does activates the  Account To do SSO see the methods to create a hash and use those ones!
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {UserBody} [body] 
+         * @param {UserDTO} [user] 
+         * @param {boolean} [confirm] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        add3(sid: string, body?: UserBody, options?: any): AxiosPromise<Array<UserDTO>> {
-            return UserServiceApiFp(configuration).add3(sid, body, options).then((request) => request(axios, basePath));
+        add3(sid: string, user?: UserDTO, confirm?: boolean, options?: any): AxiosPromise<Array<UserDTO>> {
+            return UserServiceApiFp(configuration).add3(sid, user, confirm, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete a certain user by its id
@@ -460,12 +483,13 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         /**
          * Sets the SessionObject for a certain SID, after setting this  Session-Object you can use the SID + a RoomId to enter any Room. ...  Session-Hashs are deleted 15 minutes after the creation if not used.
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {UserHashBody} [body] 
+         * @param {ExternalUserDTO} [user] 
+         * @param {RoomOptionsDTO} [options] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRoomHash(sid: string, body?: UserHashBody, options?: any): AxiosPromise<ServiceResult> {
-            return UserServiceApiFp(configuration).getRoomHash(sid, body, options).then((request) => request(axios, basePath));
+        getRoomHash(sid: string, user?: ExternalUserDTO, roomOptions?: RoomOptionsDTO, options?: any): AxiosPromise<ServiceResult> {
+            return UserServiceApiFp(configuration).getRoomHash(sid, user, roomOptions, options).then((request) => request(axios, basePath));
         },
         /**
          * Login and create sessionId required for sub-sequent calls
@@ -490,13 +514,14 @@ export class UserServiceApi extends BaseAPI {
     /**
      * Adds a new User like through the Frontend, but also does activates the  Account To do SSO see the methods to create a hash and use those ones!
      * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-     * @param {UserBody} [body] 
+     * @param {UserDTO} [user] 
+     * @param {boolean} [confirm] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserServiceApi
      */
-    public add3(sid: string, body?: UserBody, options?: any) {
-        return UserServiceApiFp(this.configuration).add3(sid, body, options).then((request) => request(this.axios, this.basePath));
+    public add3(sid: string, user?: UserDTO, confirm?: boolean, options?: any) {
+        return UserServiceApiFp(this.configuration).add3(sid, user, confirm, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Delete a certain user by its id
@@ -534,13 +559,14 @@ export class UserServiceApi extends BaseAPI {
     /**
      * Sets the SessionObject for a certain SID, after setting this  Session-Object you can use the SID + a RoomId to enter any Room. ...  Session-Hashs are deleted 15 minutes after the creation if not used.
      * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-     * @param {UserHashBody} [body] 
+     * @param {ExternalUserDTO} [user] 
+     * @param {RoomOptionsDTO} [options] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserServiceApi
      */
-    public getRoomHash(sid: string, body?: UserHashBody, options?: any) {
-        return UserServiceApiFp(this.configuration).getRoomHash(sid, body, options).then((request) => request(this.axios, this.basePath));
+    public getRoomHash(sid: string, user?: ExternalUserDTO, roomOptions?: RoomOptionsDTO, options?: any) {
+        return UserServiceApiFp(this.configuration).getRoomHash(sid, user, roomOptions, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Login and create sessionId required for sub-sequent calls

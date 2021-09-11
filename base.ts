@@ -52,6 +52,10 @@ export class BaseAPI {
             this.configuration = configuration;
             this.basePath = configuration.basePath || this.basePath;
         }
+        axios.interceptors.request.use(request => {
+            console.log('Starting Request', JSON.stringify(request, null, 2))
+            return request
+        })
     }
 };
 

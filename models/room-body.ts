@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {RoomDTO} from "./room-dto";
-
 /**
  * 
  * @export
@@ -24,5 +22,5 @@ export interface RoomBody {
      * @type {RoomDTO}
      * @memberof RoomBody
      */
-    room: RoomDTO;
+    room: any;
 }

@@ -11,9 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {ExternalUserDTO} from "./external-user-dto";
-import {RoomOptionsDTO} from "./room-options-dto";
-
 /**
  * 
  * @export
@@ -21,15 +18,15 @@ import {RoomOptionsDTO} from "./room-options-dto";
  */
 export interface UserHashBody {
     /**
-     *
+     * 
      * @type {ExternalUserDTO}
      * @memberof UserHashBody
      */
-    user: ExternalUserDTO;
+    user: any;
     /**
      * 
      * @type {RoomOptionsDTO}
      * @memberof UserHashBody
      */
-    options: RoomOptionsDTO;
+    options: any;
 }

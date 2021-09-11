@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {UserDTO} from "./user-dto";
-
 /**
  * 
  * @export
@@ -24,11 +22,11 @@ export interface UserBody {
      * @type {UserDTO}
      * @memberof UserBody
      */
-    user: UserDTO;
+    user: any;
     /**
      * whatever or not to send email, leave empty for auto-send
      * @type {boolean}
      * @memberof UserBody
      */
-    confirm?: boolean;
+    confirm: any;
 }

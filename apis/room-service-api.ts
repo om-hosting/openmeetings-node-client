@@ -17,10 +17,11 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { InvitationDTO } from '../models';
-import { RoomBody } from '../models';
 import { RoomDTO } from '../models';
 import { ServiceResult } from '../models';
 import { UserDTO } from '../models';
+import * as FormData from "form-data";
+
 /**
  * RoomServiceApi - axios parameter creator
  * @export
@@ -30,11 +31,11 @@ export const RoomServiceApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Adds a new ROOM like through the Frontend
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {RoomBody} [body] 
+         * @param {RoomDTO} [room] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        add2: async (sid: string, body?: RoomBody, options: any = {}): Promise<RequestArgs> => {
+        add2: async (sid: string, room?: RoomDTO, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'sid' is not null or undefined
             if (sid === null || sid === undefined) {
                 throw new RequiredError('sid','Required parameter sid was null or undefined when calling add2.');
@@ -49,13 +50,18 @@ export const RoomServiceApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             if (sid !== undefined) {
                 localVarQueryParameter['sid'] = sid;
             }
 
-            localVarHeaderParameter['Content-Type'] = '*/*';
 
+            if (room !== undefined) { 
+                localVarFormParams.append('room', JSON.stringify(room));
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -66,8 +72,7 @@ export const RoomServiceApiAxiosParamCreator = function (configuration?: Configu
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -703,12 +708,12 @@ export const RoomServiceApiFp = function(configuration?: Configuration) {
         /**
          * Adds a new ROOM like through the Frontend
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {RoomBody} [body] 
+         * @param {RoomDTO} [room] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async add2(sid: string, body?: RoomBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomDTO>> {
-            const localVarAxiosArgs = await RoomServiceApiAxiosParamCreator(configuration).add2(sid, body, options);
+        async add2(sid: string, room?: RoomDTO, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomDTO>> {
+            const localVarAxiosArgs = await RoomServiceApiAxiosParamCreator(configuration).add2(sid, room, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -900,12 +905,12 @@ export const RoomServiceApiFactory = function (configuration?: Configuration, ba
         /**
          * Adds a new ROOM like through the Frontend
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {RoomBody} [body] 
+         * @param {RoomDTO} [room] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        add2(sid: string, body?: RoomBody, options?: any): AxiosPromise<RoomDTO> {
-            return RoomServiceApiFp(configuration).add2(sid, body, options).then((request) => request(axios, basePath));
+        add2(sid: string, room?: RoomDTO, options?: any): AxiosPromise<RoomDTO> {
+            return RoomServiceApiFp(configuration).add2(sid, room, options).then((request) => request(axios, basePath));
         },
         /**
          * Method to clean room white board (all objects will be purged) - Deprecated use WbService#resetWb method instead
@@ -1046,13 +1051,13 @@ export class RoomServiceApi extends BaseAPI {
     /**
      * Adds a new ROOM like through the Frontend
      * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-     * @param {RoomBody} [body] 
+     * @param {RoomDTO} [room] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomServiceApi
      */
-    public add2(sid: string, body?: RoomBody, options?: any) {
-        return RoomServiceApiFp(this.configuration).add2(sid, body, options).then((request) => request(this.axios, this.basePath));
+    public add2(sid: string, room?: RoomDTO, options?: any) {
+        return RoomServiceApiFp(this.configuration).add2(sid, room, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Method to clean room white board (all objects will be purged) - Deprecated use WbService#resetWb method instead

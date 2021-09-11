@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {AppointmentDTO} from "./appointment-dto";
-
 /**
  * 
  * @export
@@ -24,5 +22,5 @@ export interface CalendarBody {
      * @type {AppointmentDTO}
      * @memberof CalendarBody
      */
-    appointment: AppointmentDTO;
+    appointment: any;
 }

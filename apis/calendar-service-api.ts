@@ -17,8 +17,9 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { AppointmentDTO } from '../models';
-import { CalendarBody } from '../models';
 import { ServiceResult } from '../models';
+import * as FormData from "form-data";
+
 /**
  * CalendarServiceApi - axios parameter creator
  * @export
@@ -376,11 +377,11 @@ export const CalendarServiceApiAxiosParamCreator = function (configuration?: Con
         /**
          * Create an appointment
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {CalendarBody} [body] 
+         * @param {AppointmentDTO} [appointment] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        save: async (sid: string, body?: CalendarBody, options: any = {}): Promise<RequestArgs> => {
+        save: async (sid: string, appointment?: AppointmentDTO, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'sid' is not null or undefined
             if (sid === null || sid === undefined) {
                 throw new RequiredError('sid','Required parameter sid was null or undefined when calling save.');
@@ -395,13 +396,18 @@ export const CalendarServiceApiAxiosParamCreator = function (configuration?: Con
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
             if (sid !== undefined) {
                 localVarQueryParameter['sid'] = sid;
             }
 
-            localVarHeaderParameter['Content-Type'] = '*/*';
 
+            if (appointment !== undefined) { 
+                localVarFormParams.append('appointment', JSON.stringify(appointment));
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -412,8 +418,7 @@ export const CalendarServiceApiAxiosParamCreator = function (configuration?: Con
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -532,12 +537,12 @@ export const CalendarServiceApiFp = function(configuration?: Configuration) {
         /**
          * Create an appointment
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {CalendarBody} [body] 
+         * @param {AppointmentDTO} [appointment] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async save(sid: string, body?: CalendarBody, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppointmentDTO>> {
-            const localVarAxiosArgs = await CalendarServiceApiAxiosParamCreator(configuration).save(sid, body, options);
+        async save(sid: string, appointment?: AppointmentDTO, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppointmentDTO>> {
+            const localVarAxiosArgs = await CalendarServiceApiAxiosParamCreator(configuration).save(sid, appointment, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -627,12 +632,12 @@ export const CalendarServiceApiFactory = function (configuration?: Configuration
         /**
          * Create an appointment
          * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-         * @param {CalendarBody} [body] 
+         * @param {AppointmentDTO} [appointment] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        save(sid: string, body?: CalendarBody, options?: any): AxiosPromise<AppointmentDTO> {
-            return CalendarServiceApiFp(configuration).save(sid, body, options).then((request) => request(axios, basePath));
+        save(sid: string, appointment?: AppointmentDTO, options?: any): AxiosPromise<AppointmentDTO> {
+            return CalendarServiceApiFp(configuration).save(sid, appointment, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -726,12 +731,12 @@ export class CalendarServiceApi extends BaseAPI {
     /**
      * Create an appointment
      * @param {string} sid The SID of the User. This SID must be marked as Loggedin
-     * @param {CalendarBody} [body] 
+     * @param {AppointmentDTO} [appointment] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CalendarServiceApi
      */
-    public save(sid: string, body?: CalendarBody, options?: any) {
-        return CalendarServiceApiFp(this.configuration).save(sid, body, options).then((request) => request(this.axios, this.basePath));
+    public save(sid: string, appointment?: AppointmentDTO, options?: any) {
+        return CalendarServiceApiFp(this.configuration).save(sid, appointment, options).then((request) => request(this.axios, this.basePath));
     }
 }
