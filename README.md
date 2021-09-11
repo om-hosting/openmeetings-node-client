@@ -30,7 +30,12 @@ See also: https://openmeetings.apache.org/swagger/
 npm install openmeetings-node-client
 ```
 
-In your project JavaScript/ES6 file, eg assuming you are using the Express framework:
+Eg generate a unique hash to enter a conference room:
+1. Login to service
+2. Generate Hash for entering a conference room
+3. Construct Login URL
+
+Code example (see comments with step 1,2,3 in below script). In your project JavaScript/ES6 file, eg assuming you are using the Express framework:
 ```javascript
 const express = require("express");
 const {UserServiceApi, Configuration} = require("openmeetings-node-client");
