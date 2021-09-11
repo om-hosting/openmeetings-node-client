@@ -12,6 +12,12 @@ This library is a client in TypeScript/Javascript for connecting to https://open
 
 The API requires a secure token that is shared between clients. Most commonly this token is shared between web-service calls. That is why executing the WebService calls from a browser is not a good idea as it would be very easy for a 3rd party to read the credentials.
 
+## Use cases and setting up OpenMeetings
+
+The plugin assumes you have an OpenMeetings Conference Server running.
+
+You can find an example use case at https://om-hosting.com/openmeetings-integration-nodejs/
+
 ## Available APIs
 
 This is based on the OpenMeetings-7.0.0 Rest API
