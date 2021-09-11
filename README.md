@@ -60,15 +60,12 @@ app.get('/', async (req, res) => {
     // 1. Login to service
     const loginResult = await userService.login("admin", "!HansHans").then(value => {
         return {
-            // @ts-ignore
             message: value.data.serviceResult.message,
-            // @ts-ignore
             type: value.data.serviceResult.type
         };
     }).catch(error => {
-        console.log(error);
         return {
-            message: 'Server Error',
+            message: error.message,
             type: 'ERROR'
         };
     });
@@ -92,15 +89,12 @@ app.get('/', async (req, res) => {
         moderator: true
     }).then(value => {
         return {
-            // @ts-ignore
             message: value.data.serviceResult.message,
-            // @ts-ignore
             type: value.data.serviceResult.type
         };
     }).catch(error => {
-        console.log(error.message);
         return {
-            message: 'Server Error',
+            message: error.message,
             type: 'ERROR'
         };
     });
@@ -158,9 +152,8 @@ app.get('/', async (req, res) => {
             type: value.data.serviceResult.type
         };
     }).catch(error => {
-        console.log(error);
         return {
-            message: 'Server Error',
+            message: error.message,
             type: 'ERROR'
         };
     });
@@ -190,9 +183,8 @@ app.get('/', async (req, res) => {
             type: value.data.serviceResult.type
         };
     }).catch(error => {
-        console.log(error.message);
         return {
-            message: 'Server Error',
+            message: error.message,
             type: 'ERROR'
         };
     });
