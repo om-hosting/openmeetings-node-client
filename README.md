@@ -1,5 +1,11 @@
 ## OpenMeetings Client for Node
 
+![language](https://img.shields.io/github/languages/top/om-hosting/openmeetings-node-client)
+![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/openmeetings-node-client)
+![dependencies](https://img.shields.io/librariesio/release/npm/openmeetings-node-client)
+![issues](https://img.shields.io/github/issues/om-hosting/openmeetings-node-client)
+![downloads](https://img.shields.io/npm/dm/openmeetings-node-client)
+
 This library is a client in TypeScript/Javascript for connecting to https://openmeetings.apache.org/ and using the Rest API in order to login and access the Web Conference Room
 
 **This library and most of the OpenMeetings API is intended for Server 2 Server integration and executed in NodeJS. Not for your browser directly integrating with OpenMeetings.**
