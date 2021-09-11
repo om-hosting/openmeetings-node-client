@@ -8,7 +8,7 @@
 
 This library is a client in TypeScript/Javascript for connecting to https://openmeetings.apache.org/ and using the Rest API in order to login and access the Web Conference Room
 
-**This library and most of the OpenMeetings API is intended for Server 2 Server integration and executed in NodeJS. Not for your browser directly integrating with OpenMeetings.**
+**This library and most of the OpenMeetings API is intended for Server 2 Server integration and executed in NodeJS (Website, API or serverless, eg AWS/Lambda). Not for your browser directly integrating with OpenMeetings.**
 
 The API requires a secure token that is shared between clients. Most commonly this token is shared between web-service calls. That is why executing the WebService calls from a browser is not a good idea as it would be very easy for a 3rd party to read the credentials.
 
