@@ -2,7 +2,7 @@
 
 ![language](https://img.shields.io/github/languages/top/om-hosting/openmeetings-node-client)
 ![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/openmeetings-node-client)
-![dependencies](https://img.shields.io/librariesio/release/npm/openmeetings-node-client)
+![dependencies2](https://img.shields.io/librariesio/release/npm/openmeetings-node-client)
 ![issues](https://img.shields.io/github/issues/om-hosting/openmeetings-node-client)
 ![downloads](https://img.shields.io/npm/dm/openmeetings-node-client)
 
