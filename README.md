@@ -10,7 +10,7 @@ This library is a client in TypeScript/Javascript for connecting to https://open
 
 **This library and most of the OpenMeetings API is intended for Server 2 Server integration and executed in NodeJS. Not for your browser directly integrating with OpenMeetings.**
 
-The API requires a secure token that is shared between clients. Most commonly this token is shared between web-service calls. That is why storing the token on the client is not a good idea as it would be very easy for 3rd part to read the credentials.
+The API requires a secure token that is shared between clients. Most commonly this token is shared between web-service calls. That is why executing the WebService calls from a browser is not a good idea as it would be very easy for a 3rd party to read the credentials.
 
 ## Available APIs
 
