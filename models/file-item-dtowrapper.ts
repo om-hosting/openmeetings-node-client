@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface FileItemDTOWrapper
  */
-export interface Health {
+export interface FileItemDTOWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {FileItemDTO}
+     * @memberof FileItemDTOWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    fileItemDTO?: any;
 }

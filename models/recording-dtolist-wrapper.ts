@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface RecordingDTOListWrapper
  */
-export interface Health {
+export interface RecordingDTOListWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {Array&lt;RecordingDTO&gt;}
+     * @memberof RecordingDTOListWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    recordingDTO?: any;
 }

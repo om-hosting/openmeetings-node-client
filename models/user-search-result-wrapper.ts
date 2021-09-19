@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface UserSearchResultWrapper
  */
-export interface Health {
+export interface UserSearchResultWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {UserSearchResult}
+     * @memberof UserSearchResultWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    userSearchResult?: any;
 }

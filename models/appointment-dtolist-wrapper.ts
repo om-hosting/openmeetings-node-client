@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface AppointmentDTOListWrapper
  */
-export interface Health {
+export interface AppointmentDTOListWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {Array&lt;AppointmentDTO&gt;}
+     * @memberof AppointmentDTOListWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    appointmentDTO?: any;
 }
