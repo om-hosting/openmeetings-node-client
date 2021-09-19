@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface GroupDTOListWrapper
  */
-export interface Health {
+export interface GroupDTOListWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {Array&lt;GroupDTO&gt;}
+     * @memberof GroupDTOListWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    groupDTO?: any;
 }

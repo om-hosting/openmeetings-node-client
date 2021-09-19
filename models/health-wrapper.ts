@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface HealthWrapper
  */
-export interface Health {
+export interface HealthWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {Health}
+     * @memberof HealthWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    health?: any;
 }

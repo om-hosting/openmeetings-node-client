@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface RoomDTOListWrapper
  */
-export interface Health {
+export interface RoomDTOListWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {Array&lt;RoomDTO&gt;}
+     * @memberof RoomDTOListWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    roomDTO?: any;
 }

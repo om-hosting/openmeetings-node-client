@@ -14,25 +14,13 @@
 /**
  * 
  * @export
- * @interface Health
+ * @interface FileExplorerObjectWrapper
  */
-export interface Health {
+export interface FileExplorerObjectWrapper {
     /**
      * 
-     * @type {boolean}
-     * @memberof Health
+     * @type {FileExplorerObject}
+     * @memberof FileExplorerObjectWrapper
      */
-    dbOk?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    inited?: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Health
-     */
-    installed?: any;
+    fileExplorerObject?: any;
 }
